@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TabBar: View {
+    
     var body: some View {
         TabView {
             HomeView().tabItem {
@@ -16,7 +17,7 @@ struct TabBar: View {
                     icon: { Image(systemName: "house") }
                 )
             }
-            CategoriesView().tabItem {
+            CategoriesView(category: Category.soup).tabItem {
                 Label(
                     title: { Text("Categories") },
                     icon: {
@@ -47,5 +48,5 @@ struct TabBar: View {
 }
 
 #Preview {
-    TabBar()
+    TabBar().environmentObject(RecipeViewModel())
 }

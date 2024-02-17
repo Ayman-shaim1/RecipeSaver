@@ -14,11 +14,13 @@ struct RecipeList: View {
             HStack{
                 Text("\(recipes.count) \(recipes.count > 1 ? "recipes" : "recipe")").font(.headline).opacity(0.7)
                 Spacer()
-
+                
             }
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 160),spacing: 15)], content: {
                 ForEach(recipes){
-                    recipe in RecipeCard(recipe: recipe)
+                    recipe in NavigationLink(destination: RecipeView(recipe: recipe)){
+                        RecipeCard(recipe: recipe)
+                    }
                 }
             }).padding(.top)
         }.padding()

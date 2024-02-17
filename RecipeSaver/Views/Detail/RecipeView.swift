@@ -14,30 +14,34 @@ struct RecipeView: View {
             AsyncImage(url: URL(string: recipe.image)){ image in
                 image
                     .resizable()
-                    .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                    
             } placeholder: {
                 Image(systemName: "photo")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100,height: 100,alignment: .center)
                     .foregroundColor(.white.opacity(0.7))
-                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,maxHeight: .infinity)
+                    .frame(maxWidth: .infinity,maxHeight: .infinity)
             }.frame(height: 300)
                 .background(LinearGradient(gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray]), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
             
-            VStack(spacing:30){
+            VStack(spacing:20){
                 Text(recipe.name)
                     .font(.largeTitle)
                     .bold()
                     .multilineTextAlignment(.center)
                 
                 VStack(alignment:.leading,spacing: 30){
-                    Text(recipe.description)
-                    VStack(alignment:.leading,spacing: 20){
-                        Text("Ingredients").font(.headline).bold()
-                        Text(recipe.ingredients)
+                    if !recipe.description.isEmpty {
+                        Text(recipe.description)
                     }
+                   
+                    if !recipe.ingredients.isEmpty{
+                        VStack(alignment:.leading,spacing: 20){
+                            Text("Ingredients").font(.headline).bold()
+                            Text(recipe.ingredients)
+                        }
+                    }
+                    
                     VStack(alignment:.leading,spacing: 20){
                         Text("Directions").font(.headline).bold()
                         Text(recipe.directions)
@@ -45,8 +49,7 @@ struct RecipeView: View {
                 }.frame(maxWidth:.infinity,alignment: .leading)
                 
             }.padding(.horizontal)
-            
-            
+        
         }.ignoresSafeArea(.container,edges: .top)
     }
 }
